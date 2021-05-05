@@ -24,15 +24,14 @@ class MainContainer extends Component {
       }))
   }
 
-  //// do i need to pass in props in parens below? when to pass in?
-
-
   addToPortfolio = (id) => {
+    //First find that stock object of that id 
     let stockBought = this.state.stocks.find(stock => stock.id === id)
-    // let oldIndex = this.state.stocks.indexOf(stockBought)
-    // let remainStocks = this.state.stocks.filter(stock => stock.id !== stockBought.id)
+
+    // let stockBought2 = this.state.stocks.filter(stock => stock.id === id)
+    // filter returns an array of objects. We want just a single object- so use .find function
+
     this.setState({
-      // stocks: remainStocks,
       portfolioStock: [...this.state.portfolioStock, stockBought]
     })
   }
@@ -47,32 +46,42 @@ class MainContainer extends Component {
 
 
 
-  //We'll be sending event.target.value from the dropdown (select tag) as a type arg
-  filterType = (type) => {
-    // console.log(type) //returns the event.target.value
-    // let filteredStocks = this.state.stocks.filter(stock => stock.type == typeName)
+  //We'll be sending event from the dropdown (select tag) as an argument
+  filterType = (e) => {
     this.setState({
-      filter: type
+      filter: e.target.value
     })
+    //Then inside render(), I need to replace this.state.stocks array with a new filtered array 
   }
 
 
   //Sort
-  sortStocks = (sortType) => {
-    // console.log(sortType) //returns the event.target.value
-    if (sortType === "Alphabetically") {
+  sortStocks = (e) => {
+    if (e.target.value === "Alphabetically") {
       let tickerSorted = this.state.stocks.sort((a, b) => a.ticker.localeCompare(b.ticker))
       this.setState({
         stocks: tickerSorted
       })
-    } else if (sortType === "Price") {
+    } else if (e.target.value === "Price") {
       let priceSorted = this.state.stocks.sort((a, b) => a.price - b.price)
       this.setState({
         stocks: priceSorted
       })
     }
   }
-  // i didnt have to write return inside then{} with more than one line of code
+
+  //Another way - I can do ternary:
+  // sortStocks = (sortType) => {
+  //   // debugger
+  //   this.setState({
+  //     sorted: sortType,
+  //     stocks: this.state.stocks.sort(
+  //     (a,b) => sortType === "Price" ? a.price - b.price : a.name.localeCompare(b.name) )
+  //   })
+  // }
+
+
+
 
   render() {
     // console.log(this.state.portfolioStock)

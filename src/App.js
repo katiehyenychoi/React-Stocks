@@ -6,19 +6,6 @@ import MainContainer from './containers/MainContainer'
 
 class App extends Component {
 
-  // constructor() {
-  //   super()
-  //   this.state = {
-  //     stocks: []
-  //   }
-  // }
-  // componentDidMount() {
-  //   fetch(API)
-  //     .then(res => res.json())
-  //     .then(stocksObj => this.setState({
-  //       stocks: stocksObj
-  //     }))
-  // }
 
   render() {
     return (

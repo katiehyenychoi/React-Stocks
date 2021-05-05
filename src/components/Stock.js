@@ -4,7 +4,8 @@ import React from 'react'
 const Stock = (props) => (
   <div>
     {/* Since this INDIVIDUAL stock, you have the id passed in as prop for INDIVIDUAL stock! */}
-    <div onClick={() => props.tradeStock(props.stock.id)} className="card">
+    <div onClick={() => props.buyStock ? props.buyStock(props.stock.id) : props.sellStock(props.stock.id)} className="card">
+      {/* <div onClick={() => props.tradeStock(props.stock.id)} className="card"> */}
       <div className="card-body">
         <h5 className="card-title">{
           //Company Name
